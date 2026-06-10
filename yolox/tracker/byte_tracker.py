@@ -28,7 +28,7 @@ class STrack(BaseTrack):
     def predict(self):
         mean_state = self.mean.copy()
         if self.state != TrackState.Tracked:
-            mean_state[7] = 0
+            mean_state[4:] = 0  # zero all velocity components; prevents drift for stationary objects
         self.mean, self.covariance = self.kalman_filter.predict(
             mean_state, self.covariance
         )
@@ -40,7 +40,7 @@ class STrack(BaseTrack):
             multi_covariance = np.asarray([st.covariance for st in stracks])
             for i, st in enumerate(stracks):
                 if st.state != TrackState.Tracked:
-                    multi_mean[i][7] = 0
+                    multi_mean[i][4:] = 0  # zero all velocity components; prevents drift for stationary objects
             multi_mean, multi_covariance = STrack.shared_kalman.multi_predict(
                 multi_mean, multi_covariance
             )
