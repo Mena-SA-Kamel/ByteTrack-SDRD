@@ -1,7 +1,7 @@
 # TODO: Update with exact module version
-numpy
+numpy==1.26.4
 torch>=1.7
-opencv_python
+opencv-python<5
 loguru
 scikit-image
 tqdm
@@ -10,7 +10,8 @@ Pillow
 thop
 ninja
 tabulate
-tensorboard
+tensorboard==2.16.2
+protobuf>=3.20.2,<4
 lap
 motmetrics
 filterpy
